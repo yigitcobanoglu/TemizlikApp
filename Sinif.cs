@@ -9,7 +9,7 @@ namespace TemizlikApp
     public class Sinif
     {
         public string Id { get; set; }
-        public String Ad { get;set; }
+        public string Ad { get;set; }
 
 
     }

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            cbSınıf = new ComboBox();
+            cbSinif = new ComboBox();
             lbOgrenci = new ListBox();
             btnAtamaYap = new Button();
             btnCıkar = new Button();
@@ -45,14 +45,16 @@
             panel2.SuspendLayout();
             SuspendLayout();
             // 
-            // cbSınıf
+            // cbSinif
             // 
-            cbSınıf.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 162);
-            cbSınıf.FormattingEnabled = true;
-            cbSınıf.Location = new Point(74, 36);
-            cbSınıf.Name = "cbSınıf";
-            cbSınıf.Size = new Size(165, 29);
-            cbSınıf.TabIndex = 0;
+            cbSinif.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 162);
+            cbSinif.FormattingEnabled = true;
+            cbSinif.Location = new Point(74, 36);
+            cbSinif.Name = "cbSinif";
+            cbSinif.Size = new Size(165, 29);
+            cbSinif.TabIndex = 0;
+            cbSinif.SelectedIndexChanged += cbSinif_SelectedIndexChanged;
+            cbSinif.SelectedValueChanged += cbSınıf_SelectedValueChanged;
             // 
             // lbOgrenci
             // 
@@ -61,6 +63,7 @@
             lbOgrenci.Name = "lbOgrenci";
             lbOgrenci.Size = new Size(215, 424);
             lbOgrenci.TabIndex = 1;
+            lbOgrenci.SelectedIndexChanged += lbOgrenci_SelectedIndexChanged;
             // 
             // btnAtamaYap
             // 
@@ -196,7 +199,7 @@
             Controls.Add(label1);
             Controls.Add(btnCıkar);
             Controls.Add(btnAtamaYap);
-            Controls.Add(cbSınıf);
+            Controls.Add(cbSinif);
             Name = "Form1";
             Text = "Temizlik Sıralaması";
             Load += Form1_Load;
@@ -207,7 +210,7 @@
 
         #endregion
 
-        private ComboBox cbSınıf;
+        private ComboBox cbSinif;
         private ListBox lbOgrenci;
         private Button btnAtamaYap;
         private Button btnCıkar;

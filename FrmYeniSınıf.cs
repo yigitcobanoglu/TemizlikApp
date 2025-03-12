@@ -20,6 +20,8 @@ namespace TemizlikApp
         private void btnKaydet_Click(object sender, EventArgs e)
         {
             Sinif yeni = new();
+
+            yeni.Id = Guid.NewGuid().ToString();
             yeni.Ad=txtsinifAd.Text;
             KayitYoneticisi.Siniflar.Add(yeni);
             KayitYoneticisi.Kaydet();
