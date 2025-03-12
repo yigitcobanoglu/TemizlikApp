@@ -1,7 +1,10 @@
+using System.ComponentModel;
+
 namespace TemizlikApp
 {
     public partial class Form1 : Form
     {
+        BindingList<Ogrenci>SeciliOgrenciListesi=new();
         public Form1()
         {
             InitializeComponent();
@@ -16,6 +19,11 @@ namespace TemizlikApp
             lbOgrenci.DisplayMember = "AdSoyad";
             lbOgrenci.ValueMember = "Id";
             lbOgrenci.DataSource = KayitYoneticisi.Ogrenciler;
+
+            lbTemizlikSýrasý.DisplayMember = "AdSoyad";
+            lbTemizlikSýrasý.ValueMember = "Id";   
+            lbTemizlikSýrasý.DataSource = SeciliOgrenciListesi;
+
 
         }
 
@@ -36,20 +44,32 @@ namespace TemizlikApp
 
         private void btnAtamaYap_Click(object sender, EventArgs e)
         {
-            foreach (var secilen in lbOgrenci.SelectedItems)
+            //Seçili olan? ö?renci gibi al (as=gibi)
+            //Alamazsan null de?er ver
+            Ogrenci ogr = lbOgrenci.SelectedItem as Ogrenci;
+
+            if (ogr != null)
             {
-                if (lbTemizlikSýrasý.Items.Contains(secilen))
+
+                if (SeciliOgrenciListesi.Contains(ogr))
                 {
-                    lbTemizlikSýrasý.Items.Add(secilen);
+                    MessageBox.Show("Ö?renci zaten seçili");
+                    return;
                 }
+
+                SeciliOgrenciListesi.Add(ogr);
             }
         }
 
         private void btnCýkar_Click(object sender, EventArgs e)
         {
-            while (lbTemizlikSýrasý.SelectedItems.Count > 0)
+            //Seçili olan? ö?renci gibi al (as=gibi)
+            //Alamazsan null de?er ver
+            Ogrenci ogr = lbTemizlikSýrasý.SelectedItem as Ogrenci;
+
+            if (ogr != null)
             {
-                lbTemizlikSýrasý.Items.Remove(lbTemizlikSýrasý.SelectedItems);
+                SeciliOgrenciListesi.Remove(ogr);
             }
         }
 
