@@ -35,11 +35,12 @@
             label1 = new Label();
             btnYeniSınıf = new Button();
             panel1 = new Panel();
-            label2 = new Label();
             lbTemizlikSırası = new ListBox();
-            button1 = new Button();
+            label2 = new Label();
+            btnOnayla = new Button();
             panel2 = new Panel();
             label3 = new Label();
+            btnOgrenciEkle = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
@@ -71,6 +72,7 @@
             btnAtamaYap.TabIndex = 2;
             btnAtamaYap.Text = "Atama Yap";
             btnAtamaYap.UseVisualStyleBackColor = false;
+            btnAtamaYap.Click += btnAtamaYap_Click;
             // 
             // btnCıkar
             // 
@@ -82,6 +84,7 @@
             btnCıkar.TabIndex = 2;
             btnCıkar.Text = "Çıkar";
             btnCıkar.UseVisualStyleBackColor = false;
+            btnCıkar.Click += btnCıkar_Click;
             // 
             // label1
             // 
@@ -110,11 +113,19 @@
             // 
             panel1.Controls.Add(lbTemizlikSırası);
             panel1.Controls.Add(label2);
-            panel1.Controls.Add(button1);
+            panel1.Controls.Add(btnOnayla);
             panel1.Location = new Point(411, 80);
             panel1.Name = "panel1";
             panel1.Size = new Size(278, 480);
             panel1.TabIndex = 4;
+            // 
+            // lbTemizlikSırası
+            // 
+            lbTemizlikSırası.FormattingEnabled = true;
+            lbTemizlikSırası.Location = new Point(19, 51);
+            lbTemizlikSırası.Name = "lbTemizlikSırası";
+            lbTemizlikSırası.Size = new Size(242, 379);
+            lbTemizlikSırası.TabIndex = 1;
             // 
             // label2
             // 
@@ -128,24 +139,17 @@
             label2.Text = "Bu Hafta Temizlik Sırası";
             label2.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // lbTemizlikSırası
+            // btnOnayla
             // 
-            lbTemizlikSırası.FormattingEnabled = true;
-            lbTemizlikSırası.Location = new Point(19, 51);
-            lbTemizlikSırası.Name = "lbTemizlikSırası";
-            lbTemizlikSırası.Size = new Size(242, 379);
-            lbTemizlikSırası.TabIndex = 1;
-            // 
-            // button1
-            // 
-            button1.BackColor = Color.Bisque;
-            button1.Font = new Font("Calisto MT", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(135, 438);
-            button1.Name = "button1";
-            button1.Size = new Size(128, 42);
-            button1.TabIndex = 2;
-            button1.Text = "Onayla";
-            button1.UseVisualStyleBackColor = false;
+            btnOnayla.BackColor = Color.Bisque;
+            btnOnayla.Font = new Font("Calisto MT", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnOnayla.Location = new Point(135, 438);
+            btnOnayla.Name = "btnOnayla";
+            btnOnayla.Size = new Size(128, 42);
+            btnOnayla.TabIndex = 2;
+            btnOnayla.Text = "Onayla";
+            btnOnayla.UseVisualStyleBackColor = false;
+            btnOnayla.Click += btnOnayla_Click;
             // 
             // panel2
             // 
@@ -168,17 +172,29 @@
             label3.Text = "Öğreciler";
             label3.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // btnOgrenciEkle
+            // 
+            btnOgrenciEkle.Font = new Font("Calisto MT", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnOgrenciEkle.Location = new Point(135, 581);
+            btnOgrenciEkle.Name = "btnOgrenciEkle";
+            btnOgrenciEkle.Size = new Size(127, 44);
+            btnOgrenciEkle.TabIndex = 6;
+            btnOgrenciEkle.Text = "Ogrenci Ekle";
+            btnOgrenciEkle.UseVisualStyleBackColor = true;
+            btnOgrenciEkle.Click += btnOgrenciEkle_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaption;
             ClientSize = new Size(719, 637);
+            Controls.Add(btnOgrenciEkle);
             Controls.Add(panel2);
             Controls.Add(panel1);
+            Controls.Add(btnYeniSınıf);
             Controls.Add(label1);
             Controls.Add(btnCıkar);
-            Controls.Add(btnYeniSınıf);
             Controls.Add(btnAtamaYap);
             Controls.Add(cbSınıf);
             Name = "Form1";
@@ -200,8 +216,9 @@
         private Panel panel1;
         private ListBox lbTemizlikSırası;
         private Label label2;
-        private Button button1;
+        private Button btnOnayla;
         private Panel panel2;
         private Label label3;
+        private Button btnOgrenciEkle;
     }
 }
