@@ -14,7 +14,7 @@ namespace TemizlikApp
     {
         public OgrenciEkle()
         {
-            InitializeComponent();//111
+            InitializeComponent();//111S
         }
 
         private void btnKaydet_Click(object sender, EventArgs e)
