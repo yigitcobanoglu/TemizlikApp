@@ -19,7 +19,17 @@ namespace TemizlikApp
         {
             get
             {
-                return Ad + " " + Soyad;
+                return $"{Ad}{Soyad} (TP: { TemizlikPuani} )";
+            }
+        }
+        public int TemizlikPuani
+        {
+            get 
+            {
+                int sayi = KayitYoneticisi.TemizlikKayitlari.
+                    Count(x => x.OgrenciId == Id);
+
+                return sayi;
             }
         }
     }

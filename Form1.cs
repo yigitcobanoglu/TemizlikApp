@@ -4,7 +4,7 @@ namespace TemizlikApp
 {
     public partial class Form1 : Form
     {
-        BindingList<Ogrenci>SeciliOgrenciListesi=new();
+        BindingList<Ogrenci> SeciliOgrenciListesi = new();
         public Form1()
         {
             InitializeComponent();
@@ -21,7 +21,7 @@ namespace TemizlikApp
             lbOgrenci.DataSource = KayitYoneticisi.Ogrenciler;
 
             lbTemizlikSýrasý.DisplayMember = "AdSoyad";
-            lbTemizlikSýrasý.ValueMember = "Id";   
+            lbTemizlikSýrasý.ValueMember = "Id";
             lbTemizlikSýrasý.DataSource = SeciliOgrenciListesi;
 
 
@@ -53,7 +53,7 @@ namespace TemizlikApp
 
                 if (SeciliOgrenciListesi.Contains(ogr))
                 {
-                    MessageBox.Show("Ö?renci zaten seçili");
+                    MessageBox.Show("Öðrenci zaten seçili");
                     return;
                 }
 
@@ -75,19 +75,29 @@ namespace TemizlikApp
 
         private void btnOnayla_Click(object sender, EventArgs e)
         {
-            if (lbTemizlikSýrasý.Items.Count == 0)
+            if (SeciliOgrenciListesi.Count == 0)
             {
-                MessageBox.Show("Temizlik sýrasý için en az bir öðrenci seçmelisiniz.");
+                MessageBox.Show("Öðrenci seçimi yapýnýz");
                 return;
             }
 
-            string mesaj = "bu hafta temizlik yapacak öðrenciler: \n";
-            foreach (var ogrenci in lbTemizlikSýrasý.Items)
+            //Temizlik kayd? olu?tur
+            foreach (Ogrenci ogr in SeciliOgrenciListesi)
             {
-                mesaj += $"-{ogrenci}\n";
+                TemizlikKaydi kayit = new();
+                kayit.Id = Guid.NewGuid().ToString();
+                kayit.OgrenciId = ogr.Id;
+                kayit.Tarih = dtptarih.Value;
+
+                KayitYoneticisi.TemizlikKayitlari.Add(kayit);
             }
 
-            MessageBox.Show(mesaj, "Onaylandý");
+            SeciliOgrenciListesi.Clear();
+
+            KayitYoneticisi.Kaydet();
+            Filtrele();
+            BuHaftaTemizlikYapacaklar();
+            MessageBox.Show("Kayýt oluþturuldu");
         }
 
         private void btnOgrenciEkle_Click(object sender, EventArgs e)
@@ -124,6 +134,7 @@ namespace TemizlikApp
         private void cbSýnýf_SelectedValueChanged(object sender, EventArgs e)
         {
             Filtrele();
+            BuHaftaTemizlikYapacaklar();
         }
 
         private void cbSinif_SelectedIndexChanged(object sender, EventArgs e)
@@ -133,7 +144,62 @@ namespace TemizlikApp
 
         private void lbOgrenci_SelectedIndexChanged(object sender, EventArgs e)
         {
-          
+
+        }
+        void BuHaftaTemizlikYapacaklar()
+        {
+            if (cbSinif.SelectedValue == null)
+            {
+                //S?n?f seçili de?ilse
+                lbOgrenci.DataSource = null;
+                return;
+            }
+
+            //S?n?f seçili
+            string sinifId = cbSinif.SelectedValue.ToString();
+
+            var liste = KayitYoneticisi.Ogrenciler
+                .Where(x => x.SinifId == sinifId)
+                .OrderBy(x => x.TemizlikPuani)
+                .Take(2);
+            lblBuHaftaSira.Text = "Bu haftaki Sýra:\n";
+
+            if (liste.Count() == 0)
+            {
+                lblBuHaftaSira.Text += "Temizlik Yapacak Kiþi Yok";
+            }
+
+            foreach (Ogrenci ogr in liste)
+            {
+                lblBuHaftaSira.Text += $"{ogr.AdSoyad}\n";
+            }
+        }
+
+        private void btnSec_Click(object sender, EventArgs e)
+        {
+            if (cbSinif.SelectedValue == null)
+            {
+                //sýnýf seçili deðilse
+                lbOgrenci.DataSource = null;
+                return;
+            }
+            string sinifId = cbSinif.SelectedValue.ToString()!;
+
+            var liste = KayitYoneticisi.Ogrenciler
+                .Where(x => x.SinifId == sinifId)
+                .OrderBy(x => x.TemizlikPuani)
+                .Take(2);
+            foreach (Ogrenci ogr in liste)
+            {
+                if (!SeciliOgrenciListesi.Contains(ogr))
+                    SeciliOgrenciListesi.Add(ogr);
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            DateTime dt = DateTime.Now;
+            lblTarih.Text = $"Bugün {dt:dd} {dt:MMMM} {dt:yyyy} Saat : {dt:HH}:{dt:mm}";
         }
     }
 }
