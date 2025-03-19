@@ -47,6 +47,7 @@
             timer1 = new System.Windows.Forms.Timer(components);
             lblTarih = new Label();
             lblBuHaftaSira = new Label();
+            label4 = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
@@ -202,7 +203,7 @@
             // 
             // btnSec
             // 
-            btnSec.Location = new Point(701, 127);
+            btnSec.Location = new Point(711, 80);
             btnSec.Name = "btnSec";
             btnSec.Size = new Size(75, 23);
             btnSec.TabIndex = 7;
@@ -219,7 +220,7 @@
             // lblTarih
             // 
             lblTarih.BackColor = Color.Azure;
-            lblTarih.Location = new Point(2, 0);
+            lblTarih.Location = new Point(3, 4);
             lblTarih.Name = "lblTarih";
             lblTarih.Size = new Size(276, 30);
             lblTarih.TabIndex = 8;
@@ -235,12 +236,24 @@
             lblBuHaftaSira.TabIndex = 9;
             lblBuHaftaSira.Text = "Bu Haftaki Sıra:";
             // 
+            // label4
+            // 
+            label4.BackColor = Color.Azure;
+            label4.Font = new Font("Lucida Fax", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.Location = new Point(293, 701);
+            label4.Name = "label4";
+            label4.Size = new Size(170, 28);
+            label4.TabIndex = 10;
+            label4.Text = "Yiğit Çobanoğlu";
+            label4.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaption;
             ClientSize = new Size(788, 736);
+            Controls.Add(label4);
             Controls.Add(lblBuHaftaSira);
             Controls.Add(lblTarih);
             Controls.Add(btnSec);
@@ -280,5 +293,6 @@
         private Label lblTarih;
         private Label lblBuHaftaSira;
         private DateTimePicker dtptarih;
+        private Label label4;
     }
 }
